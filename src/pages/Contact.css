@@ -1,0 +1,208 @@
+.contact-hero {
+  min-height: 60vh;
+  padding: 140px 0 90px;
+}
+
+/* ── Layout ──────────────────────────────────────────────────── */
+.contact-section {
+  background: var(--bg-light);
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+/* ── Form ────────────────────────────────────────────────────── */
+.contact-form-wrap {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  border: var(--border-light);
+  padding: 48px;
+  box-shadow: var(--shadow-md);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ── Success ─────────────────────────────────────────────────── */
+.contact-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  padding: 48px 24px;
+}
+
+.contact-success h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.contact-success p {
+  color: var(--text-secondary);
+  max-width: 400px;
+  line-height: 1.7;
+}
+
+/* ── Info Cards ──────────────────────────────────────────────── */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--white);
+  border: var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration) var(--ease);
+}
+
+.info-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: rgba(22,139,255,0.15);
+  transform: translateX(4px);
+}
+
+.info-card--highlight {
+  background: var(--blue-50);
+  border-color: rgba(22,139,255,0.2);
+}
+
+.info-card__icon {
+  width: 44px;
+  height: 44px;
+  background: var(--blue-50);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--royal-blue);
+  flex-shrink: 0;
+}
+
+.info-card--highlight .info-card__icon {
+  background: var(--royal-blue);
+  color: var(--white);
+}
+
+.info-card__title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.info-card__primary {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: color var(--duration-fast) var(--ease);
+}
+
+a.info-card__primary:hover {
+  color: var(--royal-blue);
+}
+
+.info-card__sub {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ── WhatsApp CTA ────────────────────────────────────────────── */
+.whatsapp-cta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #25D366;
+  color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: all var(--duration) var(--ease);
+  box-shadow: 0 4px 20px rgba(37,211,102,0.25);
+  margin-top: 8px;
+}
+
+.whatsapp-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(37,211,102,0.35);
+  background: #20bd5a;
+}
+
+/* ── Map ─────────────────────────────────────────────────────── */
+.contact-map {
+  padding: 60px 0 80px;
+  background: var(--bg-section);
+}
+
+.map-header {
+  margin-bottom: 32px;
+}
+
+.map-header h2 { margin-bottom: 8px; }
+
+.map-placeholder {
+  border: 2px dashed rgba(20,85,217,0.2);
+  border-radius: var(--radius-xl);
+  padding: 80px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  background: var(--white);
+  min-height: 280px;
+}
+
+.map-placeholder__text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.map-placeholder__sub {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  max-width: 420px;
+  font-style: italic;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-form-wrap { padding: 32px 24px; }
+  .contact-form__row { grid-template-columns: 1fr; }
+  .contact-hero { min-height: auto; }
+}

@@ -1,0 +1,167 @@
+.industries-hero {
+  min-height: 65vh;
+  padding: 140px 0 100px;
+}
+
+/* ── Industry Grid ───────────────────────────────────────────── */
+.ind-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.ind-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: var(--border-light);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: all var(--duration) var(--ease);
+}
+
+.ind-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  border-color: rgba(22,139,255,0.15);
+}
+
+.ind-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ind-card__icon {
+  width: 48px;
+  height: 48px;
+  background: var(--blue-50);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--royal-blue);
+  transition: all var(--duration) var(--ease);
+}
+
+.ind-card:hover .ind-card__icon {
+  background: var(--grad-blue);
+  color: var(--white);
+  transform: scale(1.08);
+}
+
+.ind-card__num {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: rgba(22,139,255,0.3);
+  letter-spacing: 0.08em;
+}
+
+.ind-card__title {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ind-card__desc {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.ind-card__solutions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.ind-card__badge {
+  font-size: 0.7rem;
+  padding: 3px 10px;
+}
+
+/* ── Cross Industry ──────────────────────────────────────────── */
+.ind-cross {
+  position: relative;
+  overflow: hidden;
+}
+
+.ind-cross__grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.ind-cross__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 28px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg);
+  transition: all var(--duration) var(--ease);
+}
+
+.ind-cross__item:hover {
+  background: rgba(22,139,255,0.1);
+  border-color: rgba(22,139,255,0.25);
+  transform: translateY(-4px);
+}
+
+.ind-cross__icon {
+  width: 56px;
+  height: 56px;
+  background: rgba(22,139,255,0.12);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7CC8FF;
+  transition: all var(--duration) var(--ease);
+}
+
+.ind-cross__item:hover .ind-cross__icon {
+  background: var(--royal-blue);
+  color: var(--white);
+}
+
+.ind-cross__label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.65);
+  text-align: center;
+}
+
+/* ── CTA ─────────────────────────────────────────────────────── */
+.ind-cta {
+  background: var(--bg-section);
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 1200px) {
+  .ind-cross__grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 1024px) {
+  .ind-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .ind-grid { grid-template-columns: repeat(2, 1fr); }
+  .ind-cross__grid { grid-template-columns: repeat(4, 1fr); }
+  .industries-hero { min-height: auto; }
+}
+
+@media (max-width: 480px) {
+  .ind-grid { grid-template-columns: 1fr; }
+  .ind-cross__grid { grid-template-columns: repeat(2, 1fr); }
+}
