@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
-  Mail, Phone, MapPin, Clock, MessageCircle, ArrowRight, CheckCircle2, Send
+  Mail, Phone, MapPin, Clock, MessageCircle, ArrowRight, CheckCircle2, Send,
+  Copy, Check, ExternalLink, Navigation, Building2
 } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import './Contact.css';
@@ -45,10 +46,10 @@ const infoCards = [
   },
   {
     Icon: MapPin,
-    title: 'Office',
-    primary: 'India',
-    sub: '[Office address — update when available]',
-    href: null,
+    title: 'Office Address',
+    primary: 'No. 34, Sathyamoorthy Street (2nd Floor)',
+    sub: 'Stuartpet, Arakkonam - 631001, Tamil Nadu',
+    href: 'https://maps.google.com/?q=No.+34,+Sathyamoorthy+Street,+Stuartpet,+Arakkonam+-+631001',
   },
   {
     Icon: Clock,
@@ -69,6 +70,14 @@ export default function Contact() {
   const [form, setForm] = useState(emptyForm);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyAddress = () => {
+    const fullAddress = 'No. 34, Sathyamoorthy Street(2nd Floor), Stuartpet, Arakkonam - 631001';
+    navigator.clipboard.writeText(fullAddress);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
 
   useEffect(() => {
     document.title = 'Contact Zentavix | Let\'s Build Something Better';
@@ -357,24 +366,100 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* ── MAP PLACEHOLDER ──────────────────────────────────── */}
+      {/* ── LOCATION MAP ─────────────────────────────────────── */}
       <section className="contact-map" aria-label="Office Location">
         <div className="container">
           <div className="map-header reveal">
-            <h2 className="heading-lg">Our Location</h2>
+            <div className="hero-eyebrow" style={{ marginBottom: '12px' }}>
+              <span style={{ width: 6, height: 6, background: '#168BFF', borderRadius: '50%', display: 'inline-block' }} />
+              VISIT OUR HEADQUARTERS
+            </div>
+            <h2 className="heading-lg">Our Office Location</h2>
             <p className="body-md">
-              Office location will be updated soon. Please use the contact form or
-              WhatsApp to reach us.
+              No. 34, Sathyamoorthy Street (2nd Floor), Stuartpet, Arakkonam - 631001, Tamil Nadu, India
             </p>
           </div>
-          <div className="map-placeholder reveal">
-            <MapPin size={40} color="rgba(20,85,217,0.4)" />
-            <p className="map-placeholder__text">
-              Map will be available once office location is confirmed.
-            </p>
-            <p className="map-placeholder__sub">
-              [Update this section with the official Zentavix office address and Google Maps embed]
-            </p>
+
+          <div className="map-wrapper reveal">
+            <div className="map-container">
+              <iframe
+                title="Zentavix Headquarters Map"
+                src="https://maps.google.com/maps?q=No.+34,+Sathyamoorthy+Street,+Stuartpet,+Arakkonam+-+631001&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="map-iframe"
+              />
+            </div>
+
+            <div className="map-info-card">
+              <div className="map-info-card__badge">
+                <Building2 size={14} />
+                ZENTAVIX HQ
+              </div>
+              <h3 className="map-info-card__title">Registered Office</h3>
+
+              <div className="map-info-card__details">
+                <div className="map-detail-item">
+                  <MapPin size={18} className="map-detail-icon" />
+                  <div>
+                    <strong>Zentavix Private Limited</strong>
+                    <p>No. 34, Sathyamoorthy Street (2nd Floor),</p>
+                    <p>Stuartpet, Arakkonam - 631001</p>
+                    <p>Tamil Nadu, India</p>
+                  </div>
+                </div>
+
+                <div className="map-detail-item">
+                  <Clock size={18} className="map-detail-icon" />
+                  <div>
+                    <strong>Business Hours</strong>
+                    <p>Monday – Saturday: 9:00 AM – 6:00 PM IST</p>
+                  </div>
+                </div>
+
+                <div className="map-detail-item">
+                  <Phone size={18} className="map-detail-icon" />
+                  <div>
+                    <strong>Direct Contact</strong>
+                    <p>+91 94453 70088</p>
+                    <p>zentavix@gmail.com</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="map-info-card__actions">
+                <a
+                  href="https://maps.google.com/?q=No.+34,+Sathyamoorthy+Street,+Stuartpet,+Arakkonam+-+631001"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary map-btn"
+                >
+                  <Navigation size={16} />
+                  Get Directions
+                </a>
+                <button
+                  type="button"
+                  onClick={handleCopyAddress}
+                  className="btn btn-secondary map-btn"
+                >
+                  {copied ? (
+                    <>
+                      <Check size={16} color="#10B981" />
+                      Address Copied!
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={16} />
+                      Copy Address
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -132,10 +132,16 @@ export default function Footer() {
                   <MessageCircle size={15} />
                   <span>WhatsApp Us</span>
                 </a>
-                <span className="footer__contact-item">
-                  <MapPin size={15} />
-                  <span>India</span>
-                </span>
+                <a
+                  href="https://maps.google.com/?q=No.+34,+Sathyamoorthy+Street,+Stuartpet,+Arakkonam+-+631001"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer__contact-item footer__contact-item--address"
+                  title="Open in Google Maps"
+                >
+                  <MapPin size={16} className="footer__address-icon" />
+                  <span>No. 34, Sathyamoorthy Street (2nd Floor), Stuartpet, Arakkonam - 631001</span>
+                </a>
               </div>
 
               {/* Socials */}

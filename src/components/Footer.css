@@ -110,6 +110,16 @@
   transition: color var(--duration-fast) var(--ease);
 }
 
+.footer__contact-item--address {
+  align-items: flex-start;
+  line-height: 1.45;
+}
+
+.footer__address-icon {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
 a.footer__contact-item:hover {
   color: var(--electric-blue);
 }
