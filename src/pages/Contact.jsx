@@ -65,11 +65,17 @@ const emptyForm = {
   service: '', details: '', budget: '', contactMethod: '',
 };
 
+import { isSupabaseConfigured, supabase } from '../lib/supabase';
+import { sendEnquiryEmail } from '../lib/emailService';
+import { generateWhatsAppLink, sendWhatsAppNotification } from '../lib/whatsappService';
+
 export default function Contact() {
   useScrollReveal();
   const [form, setForm] = useState(emptyForm);
+  const [lastSubmitted, setLastSubmitted] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const [copied, setCopied] = useState(false);
 
   const handleCopyAddress = () => {
@@ -90,15 +96,52 @@ export default function Contact() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
-    // Simulate send
-    setTimeout(() => {
-      setSubmitting(false);
+    setErrorMsg('');
+
+    try {
+      const currentForm = { ...form };
+
+      // 1. Save to Supabase Database
+      if (isSupabaseConfigured && supabase) {
+        const { error } = await supabase.from('enquiries').insert([
+          {
+            full_name: currentForm.fullName,
+            company: currentForm.company || null,
+            email: currentForm.email,
+            phone: currentForm.phone,
+            service: currentForm.service,
+            details: currentForm.details,
+            budget: currentForm.budget || null,
+            contact_method: currentForm.contactMethod || 'Email',
+          },
+        ]);
+
+        if (error) {
+          throw new Error(error.message);
+        }
+      } else {
+        // Fallback simulation if Supabase credentials are not yet configured
+        await new Promise((resolve) => setTimeout(resolve, 800));
+      }
+
+      // 2. Dispatch email notification to official company email (EmailJS / Web3Forms)
+      await sendEnquiryEmail(currentForm);
+
+      // 3. Automated WhatsApp notification (if API configured)
+      sendWhatsAppNotification(currentForm);
+
+      setLastSubmitted(currentForm);
       setSubmitted(true);
       setForm(emptyForm);
-    }, 1500);
+    } catch (err) {
+      console.error('Submission error:', err);
+      setErrorMsg(err.message || 'Failed to submit enquiry. Please try again or reach out on WhatsApp.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -150,15 +193,48 @@ export default function Contact() {
                     Thank you for reaching out to Zentavix. We've received your message
                     and will get back to you within one business day.
                   </p>
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => setSubmitted(false)}
-                  >
-                    Send Another Enquiry
-                  </button>
+                  <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center', marginTop: '16px' }}>
+                    <a
+                      href={generateWhatsAppLink(lastSubmitted || {})}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn"
+                      style={{
+                        background: '#25D366',
+                        color: '#fff',
+                        borderColor: '#25D366',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        textDecoration: 'none'
+                      }}
+                    >
+                      <MessageCircle size={18} />
+                      Fast Track on WhatsApp
+                    </a>
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => setSubmitted(false)}
+                    >
+                      Send Another Enquiry
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form className="contact-form" onSubmit={handleSubmit} noValidate>
+                  {errorMsg && (
+                    <div className="contact-error-alert" style={{
+                      padding: '12px 16px',
+                      background: 'rgba(239, 68, 68, 0.12)',
+                      border: '1px solid rgba(239, 68, 68, 0.3)',
+                      borderRadius: '8px',
+                      color: '#f87171',
+                      fontSize: '0.9rem',
+                      marginBottom: '20px'
+                    }}>
+                      {errorMsg}
+                    </div>
+                  )}
                   <div className="contact-form__row">
                     <div className="form-group">
                       <label htmlFor="fullName" className="form-label">
