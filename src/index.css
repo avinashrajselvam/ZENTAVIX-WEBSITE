@@ -316,6 +316,10 @@ input, textarea, select {
   cursor: pointer;
   border: none;
   white-space: nowrap;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  text-decoration: none;
 }
 
 .btn-primary {
@@ -508,6 +512,20 @@ input, textarea, select {
   flex-wrap: wrap;
   gap: 16px;
   align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+@media (max-width: 600px) {
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* ── Icon Strip ──────────────────────────────────────────────── */
