@@ -1,7 +1,7 @@
 .ai-chatbot-container {
   position: fixed;
-  bottom: 28px;
-  right: 100px;
+  bottom: 100px;
+  right: 28px;
   z-index: 998;
   display: flex;
   flex-direction: column;

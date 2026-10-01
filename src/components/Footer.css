@@ -58,10 +58,10 @@
 }
 
 .footer__logo-img {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   object-fit: contain;
-  border-radius: 50%;
+  border-radius: 8px;
 }
 
 .footer__logo-text {
