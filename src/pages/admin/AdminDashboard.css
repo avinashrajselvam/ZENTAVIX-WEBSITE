@@ -431,3 +431,77 @@
   gap: 12px;
   background: rgba(0, 0, 0, 0.2);
 }
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 24px 0 60px 0;
+  }
+
+  .admin-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .admin-title {
+    font-size: 1.5rem;
+  }
+
+  .admin-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .admin-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .admin-stat-card {
+    padding: 14px;
+  }
+
+  .stat-value {
+    font-size: 1.3rem;
+  }
+
+  .admin-controls-bar {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .status-select {
+    width: 100%;
+  }
+
+  .modal-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .modal-dialog {
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-body {
+    overflow-y: auto;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+  }
+
+  .modal-footer .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

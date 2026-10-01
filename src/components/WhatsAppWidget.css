@@ -269,3 +269,25 @@
 .whatsapp-send-btn:hover {
   transform: scale(1.1);
 }
+
+@media (max-width: 600px) {
+  .whatsapp-widget-container {
+    right: 16px;
+    bottom: 18px;
+  }
+
+  .whatsapp-float-btn {
+    width: 52px;
+    height: 52px;
+  }
+
+  .whatsapp-popup {
+    position: fixed;
+    bottom: 80px;
+    left: 14px;
+    right: 14px;
+    width: auto;
+    max-width: none;
+    margin-bottom: 0;
+  }
+}
