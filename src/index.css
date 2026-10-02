@@ -112,10 +112,14 @@ button {
   background: none;
   cursor: pointer;
   font-family: inherit;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 input, textarea, select {
   font-family: inherit;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* ── Page Transitions ───────────────────────────────────────── */
@@ -635,6 +639,11 @@ input, textarea, select {
   .grid-4 { grid-template-columns: 1fr; }
   .hero { padding: 120px 0 70px; }
   .section-header { margin-bottom: 40px; }
+  .form-input,
+  .form-select,
+  .form-textarea {
+    font-size: 16px; /* Prevents auto-zoom on iOS Safari */
+  }
 }
 
 @media (max-width: 480px) {
